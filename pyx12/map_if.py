@@ -476,10 +476,20 @@ class loop_if(x12_node):
     def get_parent(self):
         return self.parent
 
-    def get_first_node(self):
+    def get_first_node(self, usage=None):
+        """
+        Get the first node in the loop
+        @param usage: None if any usage, else 'R' or 'S'
+        """
         pos_keys = sorted(self.pos_map)
         if len(pos_keys) > 0:
-            return self.pos_map[pos_keys[0]][0]
+            # Find the first segment with the correct usage
+            for k in pos_keys:
+                child = self.pos_map[k][0]
+                if usage and child.usage != usage:
+                    continue
+                return child
+            # return self.pos_map[pos_keys[0]][0]
         else:
             return None
 

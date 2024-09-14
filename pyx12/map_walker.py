@@ -288,6 +288,7 @@ class walk_tree(object):
         if len(loop_node) <= 0:  # Has no children
             return False
         first_child_node = loop_node.get_first_node()
+        first_required_node = loop_node.get_first_node('R')
         assert first_child_node is not None, 'get_first_node failed from loop %s' % (loop_node.id)
         if first_child_node.is_loop():
             #If any loop node matches
@@ -295,7 +296,7 @@ class walk_tree(object):
                 if child_node.is_loop() and self._is_loop_match(child_node,
                                                                 seg_data, errh, seg_count, cur_line, ls_id):
                     return True
-        elif is_first_seg_match2(first_child_node, seg_data):
+        elif is_first_seg_match2(first_child_node, seg_data) or is_first_seg_match2(first_required_node, seg_data):
             return True
         elif loop_node.usage == 'R' and self.counter.get_count(loop_node.x12path) < 1:
             fake_seg = pyx12.segment.Segment('%s' % (first_child_node.id), '~', '*', ':')
@@ -328,6 +329,7 @@ class walk_tree(object):
         assert loop_node.is_loop(), "_goto_seg_match failed, node %s is not a loop. seg %s" \
             % (loop_node.id, seg_data.get_seg_id())
         first_child_node = loop_node.get_first_seg()
+        first_required_node = loop_node.get_first_node('R')
         if first_child_node is not None and is_first_seg_match2(first_child_node, seg_data):
             self._check_loop_usage(loop_node, seg_data,
                                    seg_count, cur_line, ls_id, errh)
@@ -336,6 +338,14 @@ class walk_tree(object):
             #assert first_child_node.get_cur_count() == self.counter.get_count(first_child_node.x12path), 'first_child_node counts not equal'
             self._flush_mandatory_segs(errh)
             return (first_child_node, [loop_node])
+        elif first_required_node is not None and is_first_seg_match2(first_required_node, seg_data):
+            self._check_loop_usage(loop_node, seg_data,
+                                   seg_count, cur_line, ls_id, errh)
+            #first_required_node.incr_cur_count()
+            self.counter.increment(first_required_node.x12path)
+            #assert first_required_node.get_cur_count() == self.counter.get_count(first_required_node.x12path), 'first_required_node counts not equal'
+            self._flush_mandatory_segs(errh)
+            return (first_required_node, [loop_node])
         else:
             for child in loop_node.childIterator():
                 if child.is_loop():
