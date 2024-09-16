@@ -296,7 +296,8 @@ class walk_tree(object):
                 if child_node.is_loop() and self._is_loop_match(child_node,
                                                                 seg_data, errh, seg_count, cur_line, ls_id):
                     return True
-        elif is_first_seg_match2(first_child_node, seg_data) or is_first_seg_match2(first_required_node, seg_data):
+        elif (is_first_seg_match2(first_child_node, seg_data) or
+              (first_required_node and is_first_seg_match2(first_required_node, seg_data))):
             return True
         elif loop_node.usage == 'R' and self.counter.get_count(loop_node.x12path) < 1:
             fake_seg = pyx12.segment.Segment('%s' % (first_child_node.id), '~', '*', ':')
