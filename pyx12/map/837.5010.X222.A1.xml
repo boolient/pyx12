@@ -1045,6 +1045,7 @@
                   <valid_codes>
                     <code>EI</code>
                     <code>SY</code>
+                      <code>G5</code>
                   </valid_codes>
                 </element>
                 <element xid="REF02">
