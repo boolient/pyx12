@@ -815,17 +815,14 @@ class X12ContextReader(object):
                 elif seg_id == 'GS':
                     fic = seg.get_value('GS01')
                     vriic = seg.get_value('GS08')
+                    if vriic.endswith('X222'):
+                        vriic = vriic[:-2] + 'A1'
                     map_file_new = self.map_index_if.get_filename(icvn, vriic, fic)
                     if self.map_file != map_file_new:
                         self.map_file = map_file_new
                         if self.map_file is None:
-                            # Fallback to X222.A1 when specific map not found
-                            fallback_vriic = vriic[:-2] + 'A1' if vriic.endswith('X222') else vriic
-                            map_file_new = self.map_index_if.get_filename(icvn, fallback_vriic, fic)
-                            self.map_file = map_file_new
-                            if self.map_file is None:
-                                raise pyx12.errors.EngineError("Map not found.  icvn=%s, fic=%s, vriic=%s" %
-                                                               (icvn, fic, vriic))
+                            raise pyx12.errors.EngineError("Map not found.  icvn=%s, fic=%s, vriic=%s" %
+                                                           (icvn, fic, vriic))
                         cur_map = map_if.load_map_file(self.map_file, self.param, self.map_path)
                         if cur_map.id == '837':
                             self.src.check_837_lx = True
