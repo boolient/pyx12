@@ -816,7 +816,7 @@ class X12ContextReader(object):
                     fic = seg.get_value('GS01')
                     vriic = seg.get_value('GS08')
                     if vriic.endswith('X222'):
-                        vriic = vriic[:-2] + 'A1'
+                        vriic = vriic + 'A1'
                     map_file_new = self.map_index_if.get_filename(icvn, vriic, fic)
                     if self.map_file != map_file_new:
                         self.map_file = map_file_new
