@@ -13744,6 +13744,98 @@
                       </element>
                     </segment>
                     <!--End of DTP segment-->
+                    <segment xid="NM1">
+                      <name>Ordering Provider Name</name>
+                      <usage>S</usage>
+                      <pos>5502</pos>
+                      <max_use>1</max_use>
+                      <syntax>P0809</syntax>
+                      <syntax>C1110</syntax>
+                      <syntax>C1203</syntax>
+                      <element xid="NM101">
+                        <data_ele>98</data_ele>
+                        <name>Entity Identifier Code</name>
+                        <usage>R</usage>
+                        <seq>01</seq>
+                        <valid_codes>
+                          <code>DK</code>
+                        </valid_codes>
+                      </element>
+                      <element xid="NM102">
+                        <data_ele>1065</data_ele>
+                        <name>Entity Type Qualifier</name>
+                        <usage>R</usage>
+                        <seq>02</seq>
+                        <valid_codes>
+                          <code>1</code>
+                          <code>2</code>
+                        </valid_codes>
+                      </element>
+                      <element xid="NM103">
+                        <data_ele>1035</data_ele>
+                        <name>Ordering Provider Last or Organization Name</name>
+                        <usage>R</usage>
+                        <seq>03</seq>
+                      </element>
+                      <element xid="NM104">
+                        <data_ele>1036</data_ele>
+                        <name>Ordering Provider First Name</name>
+                        <usage>S</usage>
+                        <seq>04</seq>
+                      </element>
+                      <element xid="NM105">
+                        <data_ele>1037</data_ele>
+                        <name>Ordering Provider Middle Name or Initial</name>
+                        <usage>S</usage>
+                        <seq>05</seq>
+                      </element>
+                      <element xid="NM106">
+                        <data_ele>1038</data_ele>
+                        <name>Name Prefix</name>
+                        <usage>N</usage>
+                        <seq>06</seq>
+                      </element>
+                      <element xid="NM107">
+                        <data_ele>1039</data_ele>
+                        <name>Ordering Provider Name Suffix</name>
+                        <usage>S</usage>
+                        <seq>07</seq>
+                      </element>
+                      <element xid="NM108">
+                        <data_ele>66</data_ele>
+                        <name>Identification Code Qualifier</name>
+                        <usage>S</usage>
+                        <seq>08</seq>
+                        <valid_codes>
+                          <code>XX</code>
+                        </valid_codes>
+                      </element>
+                      <element xid="NM109">
+                        <data_ele>67</data_ele>
+                        <name>Ordering Provider Identifier</name>
+                        <usage>S</usage>
+                        <seq>09</seq>
+                      </element>
+                      <element xid="NM110">
+                        <data_ele>706</data_ele>
+                        <name>Entity Relationship Code</name>
+                        <usage>N</usage>
+                        <seq>10</seq>
+                      </element>
+                      <element xid="NM111">
+                        <data_ele>98</data_ele>
+                        <name>Entity Identifier Code</name>
+                        <usage>N</usage>
+                        <seq>11</seq>
+                      </element>
+                      <element xid="NM112">
+                        <data_ele>1035</data_ele>
+                        <name>Name Last or Organization Name</name>
+                        <usage>N</usage>
+                        <seq>12</seq>
+                      </element>
+                    </segment>
+                    <!--End of NM1 segment-->
                     <segment xid="AMT">
                       <name>Remaining Patient Liability</name>
                       <usage>S</usage>
